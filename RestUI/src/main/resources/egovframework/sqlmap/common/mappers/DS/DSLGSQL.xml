@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pub.DS.LG.service.impl.DSLGMapper">
+	
+	<!-- 로그인 체크 ( select cnt ) -->
+	<select id="s_loginSelAjaxActCnt" resultType="egovMap">
+		SELECT 
+			  COUNT(*) AS CNT
+			, MEM_STAT			
+		FROM TB_COM_MEM
+		WHERE SABUN = #{id} 
+		AND PWD = #{pwd}
+		AND MEM_STAT = '02'
+	</select>
+	
+	<!-- 로그인 정보조회 ( select ) -->
+	<select id="s_loginSelAct" resultType="egovMap">
+		SELECT 
+			  MEM_SEQ_NO
+			, SABUN
+			, NAME			
+		FROM TB_COM_MEM A
+		WHERE SABUN = #{id}
+		AND MEM_STAT = '02'		
+	</select>
+	
+	<update id="s_update_pwd">
+	    UPDATE TB_COM_MEM
+		SET PWD = #{newPwd} ,
+			UDT_DTM = NOW(), 
+			UDT_NM = #{id}
+		WHERE SABUN = #{id}
+	</update>
+</mapper>

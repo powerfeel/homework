@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="globis.common.log.service.impl.CommonLogMapper">
+
+	<insert id="insertLogLogin">
+		<![CDATA[
+			INSERT INTO TB_LOG_LOGIN
+			(USER_IDX,LOGIN_DT,REQ_IP,LOGIN_METHOD)
+			VALUES 
+			(#{userIdx},NOW(),#{ip},#{loginMethod})
+		]]>
+	</insert>
+	
+	
+</mapper>

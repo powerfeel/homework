@@ -1,0 +1,61 @@
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video 
+{
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:14px;
+    vertical-align:baseline;
+    background:transparent;
+    font-family:Malgun Gothic, 맑은 고딕, dotum;
+}
+
+body {background:#ebebeb;}
+img {display:block;}
+div, ul, li {box-sizing:border-box; word-break:break-all; letter-spacing: -1px;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display:block;}
+nav,ul,li {list-style:none !important;}
+blockquote, q {quotes:none;}
+blockquote:before, blockquote:after, q:before, q:after {content:''; content:none;}
+a {margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+a:link {text-decoration:none;}
+a:hover {color:#acacac; text-decoration:none !important;}
+mark {background-color:#f9f9f9; color:#000; font-style:italic; font-weight:bold;}
+del {text-decoration: line-through;}
+table {border-collapse:collapse; border-spacing:0;}
+hr {display:block; height:1px; border:0; border-top:1px solid #cccccc; margin:1em 0; padding:0;}
+input, select {vertical-align:middle;}
+.clear {clear:both; height:0px !important; font-size:0px !important;}
+
+/* 공통 */
+.wrap {position:relative;}
+.header {width:100%; height:67px; background:url('/pub/images/pub/bg_header.png') repeat-x;}
+.header_content {width:1116px; margin:auto; position:relative;}
+.logo {position:absolute; top:17px; left:12px;}
+.logo img {display:inline-block;}
+.logout {position:absolute; top:25px; right:12px;}
+.logout li {float:left;}
+.logout li img {margin-left:15px;}
+.container {width:100%;}
+.container_menu {width:100%; height:85px;  background-size:cover;}
+.menu {width:650px; margin:auto; padding-top:15px;}
+.menu li {float:left;}
+.menu .menu02 {padding:0px 120px;}
+.container_content {width:1116px; min-height:550px; margin:auto; position:relative;}
+.content_header {width:1116px; height:144px; background:url('/pub/images/pub/bg_content_header.png') no-repeat; position:absolute; top:-48px; }
+.content_tit {margin:50px 65px 0px 65px; border-bottom:2px solid #636366; }
+.content_tit p {padding:0px 0px 15px 15px; font-size:28px; letter-spacing:-2px; font-weight:bold; color:#3f3f3f;}
+.content_middle {width:1116px; height:auto; background:url('/pub/images/pub/bg_content_middle.png') repeat-y; padding-top:96px; padding-bottom:40px;}
+.content_middle h4 {margin:0px 15px 0px 65px; background:url('/pub/images/pub/bg_info.jpg') no-repeat right bottom;}
+.content_middle h4 p {padding:0px 0px 20px 15px; line-height:180%; letter-spacing:-1px; color:#0c5fa5;}
+.footer {width:100%; height:50px; line-height:50px; background:#1965b9; color:white; font-size:15px; text-align:center;  bottom:0px; letter-spacing:0px !important;}
+
+
+/* login */
+.login_box {width:600px; height:550px; margin:130px auto; background:white; border:1px solid #ddd; text-align: center; box-shadow: 0px 2px 5px 2px #ddd;}
+.login_box h1 {font-size:30px; padding-top:50px; padding-bottom:20px;}
+.login_box h2 {font-size:20px; color:#0c5fa5; padding-bottom:20px;}
+.login_box h3 {font-size:16px; line-height:160%; padding-bottom:20px; color:#555;} 
+.input {width:500px; height:45px; border:1px solid #ddd; margin-top:20px; font-size:15px; border-radius:3px;}
+.btn_login {width:500px; height:60px; color:#fff; border:0px; background:#0862af; font-size:18px; margin-top:30px; border-radius:60px;}
