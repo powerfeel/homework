@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+ 	<!-- Appender, Layout 설정 -->
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss,SSS} %5p [%c] %m%n" />
+        </Console>
+        <!-- 
+        <File name="file" fileName="./logs/pty.log" append="false">
+		     <PatternLayout pattern="%d{HH:mm:ss,SSS} %5p [%c] %m%n"/>
+		</File>
+		 -->
+		<!-- <RollingFile name="file" fileName="/home/3dsafer/logs/relif.log" filePattern="/home/3dsafer/logs/relif.%d{yyyy-MM-dd}.log"> -->
+		<RollingFile name="file" fileName="/var/clear/logs/relif.log" filePattern="/var/clear/logs/relif.%d{yyyy-MM-dd}.log">
+			  <PatternLayout pattern="%d{HH:mm:ss,SSS} %5p [%c] %m%n" />
+			  <Policies>
+			   	<TimeBasedTriggeringPolicy/>
+			  </Policies>
+		 </RollingFile>
+ 
+    </Appenders>
+    
+    <!-- Logger 설정 -->
+    <Loggers>
+    	<!-- 
+        <Logger name="java.sql" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+			<AppenderRef ref="file"/>            
+        </Logger>
+         -->
+         
+        <logger name="java.sql.ResultSet" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</logger>
+	
+		 
+        <logger name="globis.common.log.service.impl.CommonLogMapper.insertLogReq" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</logger>
+		
+        <logger name="globis.common.log.service.impl.CommonLogMapper.selectCommonMenu" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</logger>
+		
+		
+		
+        <logger name="org.mybatis" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</logger>
+		<logger name="org.apache.ibatis" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</logger>
+        <Logger name="egovframework" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+        </Logger>
+         <Logger name="org.springframework" level="INFO" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+        </Logger>
+        
+         <!--
+        <logger name="java.sql.Connection" level="INFO" additivity="false">
+			<AppenderRef ref="console" />
+		</logger>
+		 
+        <Logger name="java.sql.PreparedStatement" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+			<AppenderRef ref="file"/>            
+        </Logger>
+       
+        <Logger name="jdbc.sqltiming" level="DEBUG" additivity="false">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+        </Logger>
+       
+		<logger name="jdbc.sqlonly" level="DEBUG" additivity="false">
+			<AppenderRef ref="console" />
+			<AppenderRef ref="file"/>
+		</logger>
+		 -->
+        <Root level="DEBUG">
+            <AppenderRef ref="console" />
+            <AppenderRef ref="file"/>
+        </Root>
+    </Loggers>
+</Configuration>

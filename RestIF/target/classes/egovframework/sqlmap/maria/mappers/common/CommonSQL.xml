@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="globis.common">
+	<sql id="pagePrefix">
+	</sql>
+	<sql id="pageSuffix">
+		<if test="sortBy != null and sortBy != ''">
+			ORDER BY ${sortBy}
+		</if>
+		<!-- firstRow는 0부터 시작.오라클은 1부터 시작 -->
+		<if test="firstRow != null and firstRow > -1">
+			<![CDATA[
+				LIMIT ${firstRow}, ${pageUnit} 
+			]]>
+		</if>
+	</sql>
+	<sql id="pageSuffix2">
+		<if test="sortBy != null and sortBy != ''">
+			ORDER BY ${sortBy}
+		</if>
+		<!-- firstRow는 0부터 시작.오라클은 1부터 시작 -->
+		<if test="firstRow != null and firstRow > -1">
+			<![CDATA[
+				LIMIT ${firstRow}, ${pageSize} 
+			]]>
+		</if>
+	</sql>
+	<sql id="countPrefix">
+ 		<![CDATA[
+ 		SELECT COUNT(*) AS TOTAL_CNT 
+ 		]]>
+	</sql>
+</mapper>

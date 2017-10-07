@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="globis.common.code.service.impl.CommonCodeMapper">
+
+	<select id="selectCommonCodeList" resultType="egovMap">
+			<![CDATA[
+			SELECT CODE_ID
+				  , CODE
+				  , CODE_NM
+				  , PARENT_CODE_ID
+				  , PARENT_CODE
+				  , USE_YN
+			FROM TB_COM_CODE A
+			ORDER BY PARENT_CODE_ID,SORT
+			]]>
+	</select>
+	
+	<select id="selectCommonCode" resultType="egovMap">
+			<![CDATA[
+			SELECT CODE_ID
+				  , CODE
+				  , CODE_NM
+				  , PARENT_CODE_ID
+				  , PARENT_CODE
+				  , USE_YN
+			FROM TB_COM_CODE 
+			WHERE CODE = #{code}
+			]]>
+	</select>
+
+	<!--  
+	<select id="selectCommonTemplateList" resultType="egovMap">
+			<![CDATA[
+			SELECT TEMP_IDX,TITLE 
+			FROM TB_SM_TEMP
+			WHERE TEMP_TYPE_CD = #{tempTypeCd}
+			AND USE_YN = 'Y'
+			ORDER BY TEMP_IDX
+			]]>
+	</select>
+	
+	<resultMap id="templateMap" type="egovMap" autoMapping="true">
+		<result property="CONTS" 	column="CONTS" jdbcType="CLOB" javaType="java.lang.String"/>
+ 	</resultMap>
+	<select id="selectCommonTemplateDetail" resultMap="templateMap">
+			<![CDATA[
+			SELECT CONTS
+			FROM TB_SM_TEMP
+			WHERE TEMP_IDX = #{tempIdx}
+			]]>
+	</select>
+	-->
+	
+</mapper>

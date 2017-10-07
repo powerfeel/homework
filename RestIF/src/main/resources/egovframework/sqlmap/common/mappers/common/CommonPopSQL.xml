@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="globis.common.pop.service.impl.CommonPopMapper">
+
+	<!-- 부서 팝업 목록 -->
+	<sql id="selectDeptListFrom">
+		 FROM TB_HUM_DEPT A
+         WHERE USE_YN = 'Y'
+         <if test="deptNm != '' and  deptNm != null">
+				<![CDATA[
+				AND DEPT_NM LIKE CONCAT(CONCAT('%',#{deptNm}),'%')
+				]]>
+		 </if>
+	</sql>
+	<select id="selectDeptList" resultType="egovMap">
+		<include refid="globis.common.pagePrefix" />
+			SELECT DEPT_IDX
+			    , DEPT_ID
+			    , DEPT_NM
+          		, F_DEPT_FULL_NM(DEPT_IDX) AS DEPT_FULL_NM
+		<include refid="selectDeptListFrom" />
+		<include refid="globis.common.pageSuffix" />
+	</select>
+	<select id="selectDeptListCnt" resultType="int">
+		<include refid="globis.common.countPrefix" />
+		<include refid="selectDeptListFrom" />
+	</select>
+	
+	
+	<!-- 사용자 팝업 목록 -->
+	<sql id="selectEmplListFrom">
+		FROM TB_HUM_EMPL A LEFT OUTER JOIN TB_HUM_DEPT B ON A.DEPT_IDX = B.DEPT_IDX
+		<where>
+			 <if test="userNm != '' and  userNm != null">
+					<![CDATA[
+					AND USER_NM = #{userNm}
+					]]>
+			 </if>
+			 <if test="deptNm != '' and  deptNm != null">
+					<![CDATA[
+					AND B.DEPT_NM LIKE CONCAT(CONCAT('%',#{deptNm}),'%')
+					]]>
+			 </if>
+		 </where>
+	</sql>
+	<select id="selectEmplList" resultType="egovMap">
+		<include refid="globis.common.pagePrefix" />
+			SELECT 
+				  A.USER_IDX
+				, A.USER_ID
+				, A.USER_NM
+				, F_DEPT_FULL_NM(A.DEPT_IDX)  		  AS DEPT_NM
+				, F_CODE_NM(A.PST_CD, 'PST_CD') AS PST_NM
+		<include refid="selectEmplListFrom" />
+		<include refid="globis.common.pageSuffix" />
+	</select>
+	<select id="selectEmplListCnt" resultType="int">
+		<include refid="globis.common.countPrefix" />
+		<include refid="selectEmplListFrom" />
+	</select>
+	
+	
+</mapper>

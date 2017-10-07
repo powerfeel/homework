@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="globis.common.login.service.impl.CommonLoginMapper">
+
+	<!-- 로그인 이메일주소로 사용자정보 SELECT -->
+	<select id="selectEmplMap" resultType="egovMap">
+		<![CDATA[
+		SELECT 
+			  A.USER_IDX
+			, A.USER_ID
+            , A.USER_NM
+            , A.DEPT_IDX
+            , (SELECT DEPT_ID FROM TB_HUM_DEPT WHERE DEPT_IDX = A.DEPT_IDX) AS DEPT_ID
+            , F_DEPT_NM(A.DEPT_IDX) AS DEPT_NM
+ 			, A.PST_CD
+			, F_CODE_NM(A.PST_CD, 'PST_CD') AS PST_NM
+            , A.SERVE_GB_CD
+			, A.PASSWORD_ENC
+			, A.EMAIL
+			, A.MNG_DEPT_IDX 
+			, (SELECT DEPT_ID FROM TB_HUM_DEPT WHERE DEPT_IDX = A.MNG_DEPT_IDX) AS MNG_DEPT_ID			
+			, F_DEPT_NM(A.MNG_DEPT_IDX) AS MNG_DEPT_NM
+			, F_DATE_TO_STR(A.LAST_LOGIN_DT, 'MINF') AS LAST_LOGIN_DT
+			, F_DATE_TO_STR(NOW(), 'MINF') AS LOGIN_DT
+			, LIMIT_IP
+		FROM TB_HUM_EMPL A
+		WHERE A.USER_ID = #{email}
+		    AND A.SERVE_GB_CD != '09'
+		]]>
+	</select>
+	
+	<!-- 로그인 사용자 허가된 메뉴 SELECT -->
+	<select id="selectAuthMenu" resultType="egovMap">
+		<![CDATA[
+		 SELECT A.MENU_ID
+                  , A.MENU_NM
+                  , A.MENU_PATH
+                  , A.PARENT_MENU_ID
+                  , MIN(B.AUTH_SCOPE_CD) AS AUTH_SCOPE_CD
+                  , MAX(B.WRITE_ABLE_YN) AS WRITE_ABLE_YN
+                  , IFNULL(A.ICON_CD, 'none') AS ICON_CD
+                  , A.SORT
+                  , A.MENU_COMMENT
+                  , IFNULL(A.SESSION_CHECK_YN, 'N') AS SESSION_CHECK_YN
+                  , IFNULL(A.MENU_POSITION, 'LEFT') AS MENU_POSITION
+                  , (SELECT COUNT(F.MENU_ID)
+                        FROM  TB_MNG_MENU F
+                                  INNER JOIN TB_MNG_MENU_AUTH_MAP G ON F.MENU_ID = G.MENU_ID
+                                  INNER JOIN TB_MNG_AUTH H ON G.AUTH_ID = H.AUTH_ID
+                                  INNER JOIN TB_MNG_EMPL_AUTH_MAP I ON H.AUTH_ID = I.AUTH_ID
+                                  INNER JOIN TB_HUM_EMPL J ON I.USER_IDX = J.USER_IDX
+                          WHERE F.USE_YN = 'Y'
+                               AND H.USE_YN = 'Y'
+                               AND J.SERVE_GB_CD != '09'
+                               AND I.USER_IDX=#{userIdx}
+                               AND F.PARENT_MENU_ID = A.MENU_ID                            
+                                  ) AS MENU_CHILD_CNT
+              FROM    TB_MNG_MENU A
+               INNER JOIN TB_MNG_MENU_AUTH_MAP B ON     A.MENU_ID = B.MENU_ID
+               INNER JOIN TB_MNG_AUTH C ON B.AUTH_ID = C.AUTH_ID
+               INNER JOIN TB_MNG_EMPL_AUTH_MAP D ON C.AUTH_ID = D.AUTH_ID
+               INNER JOIN TB_HUM_EMPL E ON D.USER_IDX = E.USER_IDX
+            WHERE A.USE_YN = 'Y'
+                AND C.USE_YN = 'Y'
+                AND E.SERVE_GB_CD != '09'
+                AND E.USER_IDX = #{userIdx}
+            GROUP BY A.MENU_ID
+                  , A.MENU_NM
+                  , A.MENU_PATH
+                  , A.PARENT_MENU_ID
+                  , A.SORT
+                  , A.ICON_CD
+                  , A.SESSION_CHECK_YN
+                  , A.MENU_POSITION
+                  , A.MENU_COMMENT
+            ORDER BY A.SORT ASC
+		]]>
+	</select>
+	
+	<!-- 세션체크 없이 공통으로 사용 가능한 메뉴 SELECT -->
+	<select id="selectCommonMenu" resultType="egovMap">
+		<![CDATA[
+		SELECT A.MENU_ID
+	              , A.MENU_NM
+	              , A.MENU_PATH
+	              , A.PARENT_MENU_ID
+	              , MIN(B.AUTH_SCOPE_CD) AS AUTH_SCOPE_CD
+	              , MAX(B.WRITE_ABLE_YN) AS WRITE_ABLE_YN
+	              , A.SORT
+	              , A.MENU_COMMENT
+	              , A.ICON_CD
+	              , IFNULL(A.MENU_POSITION, 'LEFT') AS MENU_POSITION
+	              , (SELECT COUNT(F.MENU_ID)
+                        FROM  TB_MNG_MENU F
+                          WHERE F.USE_YN = 'Y'
+                               AND F.PARENT_MENU_ID = A.MENU_ID                            
+                                  ) AS MENU_CHILD_CNT
+	          FROM    TB_MNG_MENU A
+	           INNER JOIN TB_MNG_MENU_AUTH_MAP B ON     A.MENU_ID = B.MENU_ID
+	           INNER JOIN TB_MNG_AUTH C ON B.AUTH_ID = C.AUTH_ID		           
+	        WHERE A.USE_YN = 'Y'
+	            AND C.USE_YN = 'Y'	
+                AND A.SESSION_CHECK_YN = 'N'
+	        GROUP BY A.MENU_ID
+	              , A.MENU_NM
+	              , A.MENU_PATH
+	              , A.PARENT_MENU_ID
+	              , A.SORT
+	              , A.MENU_POSITION
+	              , A.ICON_CD
+	              , A.MENU_COMMENT
+	        ORDER BY A.PARENT_MENU_ID DESC,A.SORT ASC
+		]]>
+	</select>
+	
+	<select id="selectMenuNavi" resultType="egovMap">
+		<![CDATA[
+            SELECT  
+                  A.MENU_ID
+                , A.MENU_NM                
+	          FROM TB_MNG_MENU A		           
+	        WHERE A.USE_YN = 'Y'	            	
+	        AND F_MNG_MENU_LEVEL (A.MENU_ID,#{menuId})>0
+            ORDER BY F_MNG_MENU_LEVEL (A.MENU_ID,#{menuId}) DESC
+		]]>
+	</select>		
+	
+	<update id="updateLastLoginDt">
+		<![CDATA[
+            UPDATE TB_HUM_EMPL
+            SET LAST_LOGIN_DT = NOW()  
+            WHERE USER_IDX = #{userIdx}
+		]]>
+	</update>			
+		
+	
+</mapper>

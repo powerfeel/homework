@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="release.IF.service.impl.InterfaceMapper">
+	
+	<!-- 회의실 예약 목록 가져 오기 -->
+	<select id="selectRevList" resultType="egovMap">
+		SELECT
+			  	REV_SEQ_NO,
+				REV_TITLE,
+				B.CODE_NM AS REV_ITEM,
+				REV_ID,
+				REV_NM,
+				REV_YMD,
+				REV_STIME,
+				REV_ETIME,
+				REV_MEM,
+				DATE_FORMAT(CRE_DT, '%Y-%m-%d') as CRE_DT,
+				DATE_FORMAT(UPD_DT, '%Y-%m-%d') as UPD_DT
+		FROM	TB_REV_CON A, TB_COM_CODE B
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+		    AND A.REV_ITEM = B.CODE
+		    AND B.USE_YN = 'Y'
+		    <if test="revItem != null and revItem != ''">
+		        AND A.REV_ITEM = TRIM(#{revItem})
+		    </if> 
+		    <if test="revNm != null and revNm != ''">
+		        AND A.REV_NM LIKE CONCAT('%', #{revNm}, '%')
+		    </if>
+		    <if test="revYmd != null and revYmd != ''">
+		        AND A.REV_YMD = #{revYmd}
+		    </if>
+		</trim>
+		ORDER BY A.REV_YMD ASC, A.REV_STIME ASC
+	</select>
+	
+	<!-- 회의실 예약 목록 검색 건수 -->
+	<select id="selectRevTotalCount" resultType="int">
+		SELECT
+			  	COUNT(*)
+		FROM	TB_REV_CON A, TB_COM_CODE B
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+		    AND A.REV_ITEM = B.CODE
+		    AND B.USE_YN = 'Y'
+		    <if test="revItem != null and revItem != ''">
+		        AND A.REV_ITEM = TRIM(#{revItem})
+		    </if>
+		    <if test="revNm != null and revNm != ''">
+		        AND A.REV_NM LIKE CONCAT('%', #{revNm}, '%')
+		    </if>
+		    <if test="revYmd != null and revYmd != ''">
+		        AND A.REV_YMD = #{revYmd}
+		    </if>
+		</trim>
+	</select>
+	
+	<!-- 회의실 예약 INSERT -->
+	<insert id="insertRevConference">
+		INSERT INTO TB_REV_CON (
+			REV_TITLE,
+			REV_ITEM,
+			REV_ID,
+			REV_NM,
+			REV_YMD,
+			REV_STIME,
+			REV_ETIME,
+			REV_MEM,
+			REV_CONT,
+			CRE_DT			
+		) VALUES ( 
+			  TRIM(#{revTitle})
+			, TRIM(#{revItem})
+			, TRIM(#{revId})
+			, TRIM(#{revNm})
+			, TRIM(#{revYmd})
+			, TRIM(#{revStime})
+			, TRIM(#{revEtime})
+			, TRIM(#{revMem})
+			, TRIM(#{revCont})
+			, NOW()
+		)
+	</insert>
+
+	<!-- 회의실 중복 여부 -->
+	<select id="existRevConference" resultType="int">
+		SELECT
+			  	COUNT(*) as EXISTCNT
+		FROM	TB_REV_CON
+		WHERE 	REV_ITEM = #{revItem}
+		AND 	REV_YMD = #{revYmd}
+		<![CDATA[
+		AND     ( 
+					REV_STIME = #{revStime} OR( REV_STIME < #{revStime} AND REV_ETIME > #{revStime} )
+					OR
+					REV_ETIME = #{revEtime} OR( REV_STIME < #{revEtime} AND REV_ETIME > #{revEtime} )
+				)
+		]]>
+		
+		<!-- 수정시에는 기존 예약 정보는 검색 하지 않도록 -->
+		<if test="revSeqNo != null and revSeqNo != ''">
+		        AND REV_SEQ_NO != #{revSeqNo}
+		</if>
+	</select>
+	
+	
+	<!-- 회의실 상세 정보 검색 -->
+	<select id="selectRevConference" resultType="egovMap">
+	    SELECT
+			  	REV_SEQ_NO,
+				REV_TITLE,
+				REV_ITEM,
+				REV_ID,
+				REV_NM,
+				REV_YMD,
+				REV_STIME,
+				REV_ETIME,
+				REV_MEM,
+				DATE_FORMAT(CRE_DT, '%Y-%m-%d') as CRE_DT,
+				DATE_FORMAT(UPD_DT, '%Y-%m-%d') as UPD_DT,
+				REV_CONT
+		FROM	TB_REV_CON
+		WHERE 	REV_SEQ_NO = #{revSeqNo}
+	</select>
+	
+	<!-- 회의실 예약 내용 업데이트 -->
+	<update id="updateRevConference">
+		UPDATE TB_REV_CON
+		<set>
+			<if test="revTitle != '' and  revTitle != null">
+				REV_TITLE = TRIM(#{revTitle}),
+			</if>
+			<if test="revItem != '' and  revItem != null">
+				REV_ITEM = TRIM(#{revItem}),
+			</if>
+			<if test="revYmd != '' and  revYmd != null">
+				REV_YMD = TRIM(#{revYmd}),
+			</if>
+			<if test="revStime != '' and  revStime != null">
+				REV_STIME = TRIM(#{revStime}),
+			</if>
+			<if test="revEtime != '' and  revEtime != null">
+				REV_ETIME = TRIM(#{revEtime}),
+			</if>
+			<if test="revMem != '' and  revMem != null">
+				REV_MEM = TRIM(#{revMem}),
+			</if>
+			<if test="revCont != '' and  revCont != null">
+				REV_CONT = TRIM(#{revCont}),
+			</if>
+			UPD_DT  = NOW()
+		</set>
+		WHERE REV_SEQ_NO = #{revSeqNo}
+	</update>
+	
+	<!-- 회의실 예약 정보 삭제 -->
+	<delete id="deleteRevConference">
+	    DELETE FROM TB_REV_CON 
+	    WHERE REV_SEQ_NO = #{revSeqNo}	    
+	</delete>
+</mapper>

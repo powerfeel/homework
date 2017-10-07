@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="globis.common.log.service.impl.CommonLogMapper">
+
+	
+	
+	
+	
+	
+	<sql id="selectLogReqListFrom">
+        FROM  TB_LOG_REQ A
+		<where>
+			<if test='userIdx != "" and  userIdx != null'>
+				AND USER_IDX = #{userIdx}
+			</if>
+			<if test='startDt != "" and  startDt != null'>
+				<![CDATA[
+				AND REQ_DT >= F_STR_TO_DATE(#{startDt})
+				]]>
+			</if>
+			<if test='endDt != "" and  endDt != null'>
+				<![CDATA[
+				AND REQ_DT <= F_STR_TO_DATE_END(#{endDt})
+				]]>
+			</if>
+			<if test='errorYn != null and errorYn=="Y"'>
+				<![CDATA[
+				AND ERROR_YN = 'Y'
+				]]>
+			</if>
+		</where>
+	</sql>
+	<select id="selectLogReqList" resultType="egovMap">
+		<include refid="globis.common.pagePrefix" /> 
+		<![CDATA[
+			SELECT LOG_IDX
+				,USER_IDX
+				,REQ_IP
+				,F_USER_NM(USER_IDX) AS USER_NM
+				,F_DATE_TO_STR(REQ_DT,'MINF') AS REQ_DT
+				,REQ_URL
+				,ERROR_YN
+				,PROCESS_TIME
+				,ERROR_MSG
+				,REQ_CLIENT
+				,(SELECT MAX(MENU_NM) FROM TB_MNG_MENU
+					WHERE A.REQ_URL LIKE CONCAT(SUBSTR(MENU_PATH,1,LENGTH(MENU_PATH)+1-INSTR(REVERSE(MENU_PATH),'/')),'%') 
+                  	AND MENU_NM IS NOT NULL
+            		AND MENU_PATH IS NOT NULL
+                  ) AS MENU_NM 
+		]]>
+		<include refid="selectLogReqListFrom" />
+		<include refid="globis.common.pageSuffix" />
+	</select> 
+	<select id="selectLogReqListCnt" resultType="int">
+		<include refid="globis.common.countPrefix" />
+		<include refid="selectLogReqListFrom" />
+	</select>
+			 
+			
+	<resultMap id="selectLogReqDetailMap" type="egovMap">
+		<result property="ERROR_DETAIL" 	column="ERROR_DETAIL"  jdbcType="CLOB" javaType="java.lang.String"/>
+ 	</resultMap>
+	<select id="selectLogReqDetail" resultMap="selectLogReqDetailMap">
+		<![CDATA[
+			SELECT ERROR_DETAIL
+			FROM TB_LOG_REQ
+			WHERE LOG_IDX = #{logIdx}
+		]]>
+	</select>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
+	
+	<sql id="selectLogLoginListFrom">
+        FROM  TB_LOG_LOGIN A
+		<where>
+			<if test='userIdx != "" and  userIdx != null'>
+				AND USER_IDX = #{userIdx}
+			</if>
+			<if test='startDt != "" and  startDt != null'>
+				<![CDATA[
+				AND LOGIN_DT >= F_STR_TO_DATE(#{startDt})
+				]]>
+			</if>
+			<if test='endDt != "" and  endDt != null'>
+				<![CDATA[
+				AND LOGIN_DT <= F_STR_TO_DATE_END(#{endDt})
+				]]>
+			</if>
+		</where>
+	</sql>
+	<select id="selectLogLoginList" resultType="egovMap">
+		<include refid="globis.common.pagePrefix" />
+		<![CDATA[
+			SELECT LOG_IDX
+				,USER_IDX
+				,REQ_IP
+				,F_USER_NM(USER_IDX) AS USER_NM
+				,F_DATE_TO_STR(LOGIN_DT,'MINF') AS LOGIN_DT
+				,LOGIN_METHOD
+		]]>
+		<include refid="selectLogLoginListFrom" />
+		<include refid="globis.common.pageSuffix" />
+	</select>
+	<select id="selectLogLoginListCnt" resultType="int">
+		<include refid="globis.common.countPrefix" />
+		<include refid="selectLogLoginListFrom" />
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<sql id="selectLogBatchListFrom">
+        FROM  TB_LOG_BATCH A
+		<where>
+			<if test='batchKind != "" and  batchKind != null'>
+				AND BATCH_KIND = #{batchKind}
+			</if>
+			<if test='startDt != "" and  startDt != null'>
+				<![CDATA[
+				AND BATCH_DT >= F_STR_TO_DATE(#{startDt})
+				]]>
+			</if>
+			<if test='endDt != "" and  endDt != null'>
+				<![CDATA[
+				AND BATCH_DT <= F_STR_TO_DATE_END(#{endDt})
+				]]>
+			</if>
+		</where>
+	</sql>
+	<select id="selectLogBatchList" resultType="egovMap">
+		<include refid="globis.common.pagePrefix" />
+		<![CDATA[
+			SELECT LOG_IDX
+				,BATCH_IP
+				,F_DATE_TO_STR(BATCH_DT,'MINF') AS BATCH_DT
+				,F_CODE_NM(BATCH_KIND,'BATCH_KIND') AS BATCH_KIND_NM
+				,BATCH_MSG
+		]]>
+		<include refid="selectLogBatchListFrom" />
+		<include refid="globis.common.pageSuffix" />
+	</select>
+	<select id="selectLogBatchListCnt" resultType="int">
+		<include refid="globis.common.countPrefix" />
+		<include refid="selectLogBatchListFrom" />
+	</select>
+	
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="PageCommon">
+
+	<sql id="pageCommon.pagePrefix">
+	</sql>
+	<sql id="pageCommon.pageSuffix">
+		<isNotEmpty property="sortBy">
+			ORDER BY $sortBy$
+		</isNotEmpty>
+		<!-- firstRow는 0부터 시작.오라클은 1부터 시작 -->
+		<isNotEmpty property="firstRow">
+			<isGreaterThan property="firstRow" compareValue="-1">
+				<![CDATA[
+					LIMIT #firstRow#, #pageSize# 
+				]]>
+			</isGreaterThan>
+		</isNotEmpty>
+	</sql>
+	
+	<sql id="pageCommon.countPrefix">
+ 		<![CDATA[
+ 		SELECT COUNT(*) AS TOTAL_CNT 
+ 		]]>
+	</sql>
+	
+</sqlMap>
