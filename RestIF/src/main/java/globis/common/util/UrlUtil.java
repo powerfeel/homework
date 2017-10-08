@@ -2,20 +2,6 @@ package globis.common.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * @Class Name : UrlUtil.java
- * @Description : Url 패턴 분석 Class
- * @Modification Information
- * @
- * @  수정일      		수정자                수정내용
- * @ ---------   ---------   -------------------------------
- * @ 2015.02.10   	도정훈 	       최초생성
- *
- * @author 그로비스인포텍 프레임웍 개발팀
- * @since 2015. 02.10
- * @version 1.0
- */
-
 public class UrlUtil{
 	
 	public UrlUtil() {

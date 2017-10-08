@@ -12,11 +12,7 @@
     
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		
-		<!-- 
-		<property name="mapperLocations" value="classpath:/egovframework/sqlmap/common/mappers/**/*.xml" />
-		<property name="mapperLocations" value="classpath:/egovframework/sqlmap/${Globals.DbType}/mappers/**/*.xml" />
-		 -->
+
 		 <property name="mapperLocations">
 		 	<list>
 				<value>classpath:/egovframework/sqlmap/common/mappers/**/*.xml</value>

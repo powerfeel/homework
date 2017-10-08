@@ -3,52 +3,22 @@ package globis.common.util;
 import egovframework.rte.psl.dataaccess.util.EgovMap;
 import globis.common.code.service.CommonCodeService;
 
-import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.collections.map.ListOrderedMap;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.RichTextString;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-/**
- * @Class Name : ResUtil.java
- * @Description : Resonse 관련 공통 util
- * @Modification Information
- * @
- * @  수정일      		수정자                수정내용 
- * @ ---------   ---------   -------------------------------
- * @ 2015.02.10   	도정훈 	       최초생성
- *
- * @author 그로비스인포텍 프레임웍 개발팀
- * @since 2015. 02.10
- * @version 1.0
- */
+
 public class ResUtil{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ResUtil.class);

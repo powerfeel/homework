@@ -10,8 +10,8 @@
 		     <PatternLayout pattern="%d{HH:mm:ss,SSS} %5p [%c] %m%n"/>
 		</File>
 		 -->
-		<!-- <RollingFile name="file" fileName="/home/3dsafer/logs/relif.log" filePattern="/home/3dsafer/logs/relif.%d{yyyy-MM-dd}.log"> -->
-		<RollingFile name="file" fileName="/var/clear/logs/relif.log" filePattern="/var/clear/logs/relif.%d{yyyy-MM-dd}.log">
+		
+		<RollingFile name="file" fileName="/logs/relif.log" filePattern="/logs/relif.%d{yyyy-MM-dd}.log">
 			  <PatternLayout pattern="%d{HH:mm:ss,SSS} %5p [%c] %m%n" />
 			  <Policies>
 			   	<TimeBasedTriggeringPolicy/>

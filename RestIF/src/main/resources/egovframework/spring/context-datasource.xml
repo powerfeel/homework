@@ -7,7 +7,6 @@
         <property name="locations">
             <list>
                 <value>classpath:/egovframework/egovProps/globals.properties</value>
-                <!-- value>file:/product/jeus/egovProps/globals.properties</value-->
             </list>
         </property>
     </bean>

@@ -14,25 +14,8 @@ import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
-import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 import globis.common.code.service.CommonCodeService;
 import globis.common.util.StringUtil;
-
-
-/**
- * @Class Name : CommonCodeServiceImpl.java
- * @Description : 공통코드 ServiceImpl Class
- * @Modification Information
- * @
- * @  수정일      수정자              수정내용
- * @ ---------   ---------   -------------------------------
- * @ 2015.02.10   	도정훈 	       최초생성
- *
- * @author 그로비스인포텍 프레임웍 개발팀
- * @since 2015. 02.10
- * @version 1.0
- */
-
 
 
 @Service("commonCodeService")
