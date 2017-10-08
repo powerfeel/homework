@@ -33,19 +33,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-/**
- * @Class Name : GridUtil.java
- * @Description : Axisj Grid의 포맷에 맞는 json형식 변환 Class
- * @Modification Information
- * @
- * @  수정일      		수정자                수정내용 
- * @ ---------   ---------   -------------------------------
- * @ 2015.02.10   	도정훈 	       최초생성
- *
- * @author 그로비스인포텍 프레임웍 개발팀
- * @since 2015. 02.10
- * @version 1.0
- */
+
 public class AuthUtil{
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AuthUtil.class);

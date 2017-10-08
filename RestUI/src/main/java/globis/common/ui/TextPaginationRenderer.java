@@ -21,22 +21,6 @@ import egovframework.rte.ptl.mvc.tags.ui.pagination.AbstractPaginationRenderer;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationRenderer;
 
-/**  
- * @Class Name : ImagePaginationRenderer.java
- * @Description : ImagePaginationRenderer Class
- * @Modification Information  
- * @
- * @  수정일      수정자              수정내용
- * @ ---------   ---------   -------------------------------
- * @ 2009.03.16           최초생성
- * 
- * @author 개발프레임웍크 실행환경 개발팀
- * @since 2009. 03.16
- * @version 1.0
- * @see
- * 
- *  Copyright (C) by MOPAS All right reserved.
- */
 
 public class TextPaginationRenderer implements PaginationRenderer{
 

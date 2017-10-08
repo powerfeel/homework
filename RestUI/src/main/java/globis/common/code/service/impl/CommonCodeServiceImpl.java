@@ -4,19 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import com.google.gson.Gson;
+
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
-import egovframework.rte.fdl.idgnr.EgovIdGnrService;
 import globis.common.code.service.CommonCodeService;
 import globis.common.util.StringUtil;
-
-
-
-
 
 
 @Service("commonCodeService")
@@ -27,9 +26,6 @@ public class CommonCodeServiceImpl extends EgovAbstractServiceImpl implements Co
 	@Resource(name="commonCodeMapper")
 	private CommonCodeMapper commonCodeMapper;
 	
-    //@Resource(name="manageCodeIdGnrService")
-    //private EgovIdGnrService manageCodeIdGnrService;
-    
 	private static Map<String,List<Map<String,Object>>> CODE_MAP;
 	
 	 /**

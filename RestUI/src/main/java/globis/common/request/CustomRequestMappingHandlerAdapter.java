@@ -6,19 +6,7 @@ import org.springframework.web.method.annotation.MapMethodProcessor;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.HandlerMethodArgumentResolverComposite;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
-/**
- * @Class Name : CustomRequestMappingHandlerAdapter.java
- * @Description : CustomRequestMappingHandlerAdapter Class
- * @Modification Information
- * @
- * @  수정일      		수정자                수정내용
- * @ ---------   ---------   -------------------------------
- * @ 2015.02.10   	도정훈 	       최초생성
- *
- * @author 그로비스인포텍 프레임웍 개발팀
- * @since 2015. 02.10
- * @version 1.0
- */
+
 public class CustomRequestMappingHandlerAdapter extends
 		RequestMappingHandlerAdapter {
 	public void afterPropertiesSet() {

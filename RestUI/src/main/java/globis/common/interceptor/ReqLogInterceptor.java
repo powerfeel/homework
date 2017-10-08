@@ -57,14 +57,7 @@ public class ReqLogInterceptor extends HandlerInterceptorAdapter {
     			UserSessionVO userSession =  (UserSessionVO)session.getAttribute("userPub");
     			userIdx = userSession.getMemSeqNo();
     		}
-    		
-
-//    		Enumeration params = request.getParameterNames();
-//    		while (params.hasMoreElements()){
-//    		    String name = (String)params.nextElement();
-//    		    System.out.println(name + " : " +request.getParameter(name));
-//    		}
-    		
+ 		
     		String errorMsg = "";
     		String errorDetail = "";
     		String errorYn = "N";

@@ -20,21 +20,6 @@ import org.springframework.web.util.WebUtils;
 
 import com.google.gson.Gson;
 
-
-/**
- * @Class Name : SessionCheckController.java
- * @Description : 세션 체크 Controller Class
- * @Modification Information
- * @
- * @  수정일             수정자                수정내용
- * @ ---------   ---------   -------------------------------
- * @ 2016.08.01  황경희 	          최초생성
- *
- * @author 마크애니 황경희 차장
- * @since 2016.08.19
- * @version 1.0
- */
-
 @Controller
 public class SessionCheckController {
 

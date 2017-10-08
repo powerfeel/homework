@@ -42,19 +42,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
-/**
- * @Class Name : ResUtil.java
- * @Description : Resonse 관련 공통 util
- * @Modification Information
- * @
- * @  수정일      		수정자                수정내용 
- * @ ---------   ---------   -------------------------------
- * @ 2015.02.10   	도정훈 	       최초생성
- *
- * @author 그로비스인포텍 프레임웍 개발팀
- * @since 2015. 02.10
- * @version 1.0
- */
+
 public class ExcelUtil{
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExcelUtil.class);
 

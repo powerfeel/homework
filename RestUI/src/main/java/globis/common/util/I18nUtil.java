@@ -3,11 +3,7 @@ package globis.common.util;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder; 
 
-/**
- * This utility class for internationalization.
- *
- * @author <a href="mailto:ecogeo@dreamwiz.com">Jongjin Park</a>
- */
+
 public final class I18nUtil {
 
 //    public static final String DEFAULT_CHARSET = "MS949";

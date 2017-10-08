@@ -22,13 +22,6 @@ import com.google.gson.internal.LinkedTreeMap;
 
 import egovframework.com.cmm.service.Globals;
 
-/***********************
- * 특정 웹페이지를 호출
- * 즉 특정 URL의 웹프로그램을 실행 시키는게 목적이거나
- * 특정 URL의 내용을 읽어 오는게 목적일시 
- * @author 강광묵
- * @since 2014.05.21.
- ***********************/
 public class URLConnection {
 private static final Logger LOG = Logger.getLogger(URLConnection.class.getClass());
 	

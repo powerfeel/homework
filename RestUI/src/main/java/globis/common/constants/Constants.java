@@ -4,20 +4,6 @@
 package globis.common.constants;
 
 
-/**
- * @Class Name : Constants.java
- * @Description : 공통 상수 Class
- * @Modification Information
- * @
- * @  수정일              수정자                수정내용
- * @ ---------   ---------   -------------------------------
- * @ 2016.08.25    황경희 	          최초생성
- *
- * @author 마크애니 황경희 차장
- * @since 2016.08.25
- * @version 1.0
- */
-
 public interface Constants {
 
 	/* 공통 길이 상수 */

@@ -26,7 +26,7 @@ public class RVMPController {
 	 * @param commandMap 사용자로 부터 넘겨 받은 데이터 Map
 	 * @param model ModelMap
 	 * @param session HttpSession
-	 * @return jsp경로 대시보드 페이지 경로, model로 각 데이터, 리스트 add 
+	 * @return  
 	 * @exception Exception
 	 */
 	@RequestMapping(value = "/RV/MP/s_main.do")
