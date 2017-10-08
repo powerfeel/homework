@@ -5,7 +5,7 @@
 		<!-- menu start -->
 		<div class="container_menu">
 			<ul class="menu">
-				<li class="menu01"><a href="/pub/RV/CF/cf_rev_write.do">회의실 등록</a></li>  
+				<li class="menu01"><a href="/pub/RV/CF/cf_rev_write.do">회의실 등록</a></li> 
 			   
 				<li class="menu02"><a href="/pub/RV/CF/cf_rev_list.do">회의실 조회</a></li>
 			</ul>

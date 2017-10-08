@@ -35,8 +35,6 @@
 					location.href = "<c:url value="/"/>";
 					return false;
 				});
-			}
-			
-		});
-				
+			}			
+		});				
 	</script>

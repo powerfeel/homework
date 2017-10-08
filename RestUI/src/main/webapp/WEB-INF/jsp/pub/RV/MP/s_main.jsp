@@ -32,7 +32,7 @@
 					<p>
 					회의실 예약 모듈과 I/F 모듈로 분리되어 있음<br>
 					로그인 계정은 1234 / 1234로 접속 가능 합니다.<br>
-					<br>
+					IF 모듈을 다른 Tomcat에 기동시 globals.properties Globals.IF.URL 값을 변경해야 함<br>
 					<br>
 					</p>					
 				</h4>
